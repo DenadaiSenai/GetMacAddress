@@ -35,6 +35,17 @@ void setup() {
 
   Serial.begin(115200);
 
+  printMAC();
+}
+
+void loop() {
+  while(Serial.available()) {
+    Serial.read();
+    printMAC();
+  }
+}
+
+void printMAC() {
   Serial.println("Interface\t\t\t\t\t\tMAC address (6 bytes, 4 universally administered, default)");
 
   Serial.print("Wi-Fi Station (using 'esp_efuse_mac_get_default')\t");
@@ -52,8 +63,6 @@ void setup() {
   Serial.print("Ethernet (using 'esp_read_mac')\t\t\t\t");
   Serial.println(getInterfaceMacAddress(ESP_MAC_ETH));
 }
-
-void loop() { /* Nothing in loop */ }
 
 String getDefaultMacAddress() {
 
